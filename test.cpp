@@ -2,10 +2,8 @@
 using namespace std;
 
 int main(){
-    vector<int> x,y;
-    x = {1,2,3};
-    y = {5};
-    bool res = (x > y);
-    cout << res << endl;
+    string tmp;
+    cin >> tmp;
+    cout << tmp << " printed";
     return 0;
 }
