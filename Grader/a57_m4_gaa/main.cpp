@@ -16,9 +16,9 @@ int main(){
     }
 
     if(find(dp.begin(),dp.end(),n-1) == dp.end()){
-        cout << "a";
+        cout << "a" << "\n";
     }else{
-        cout << "g";
+        cout << "g" << "\n";
     }
 
     return 0;

@@ -17,7 +17,6 @@ int main(){
             while(tmp_c < c && tmp_r <= c){
                 int cost;
                 cost = dm[r - 1]*dm[tmp_r - 1]*dm[c]; // ลบ 1 เพราะลำดับ a เริ่มที่ 0
-                
                 dp[r][c] = min(dp[r][tmp_c] + dp[tmp_r][c] + cost, dp[r][c]);
                 tmp_c++;
                 tmp_r++;
