@@ -9,12 +9,12 @@ int shortest_path(int x,int y){
     if(y<x) swap(x,y);
     int costCW = abs(psa[y]-psa[x]);
     int costCCW = totalCost - costCW;
-    // if(y<x){
-    //     swap(costCW,costCCW);
-    // }
-    if(x<= a && b <= y) costCW -= p[a];
-    else costCCW -= p[a];
-    return min(costCW,costCCW); // cost when go clock-wise and coutner-clock-wise
+    int tmp1 = abs(psa[a] - psa[x]),tmp2 = abs(psa[b] - psa[x]);
+    int distToPortal = min({tmp1,tmp2,totalCost - tmp1,totalCost - tmp2});
+    tmp1 = abs(psa[y] - psa[b]);tmp2 = abs(psa[y] - psa[a]);
+    int distToEnd = min({tmp1,tmp2,totalCost - tmp1,totalCost - tmp2});
+
+    return min({costCW,costCCW,distToEnd + distToPortal}); // cost when go clock-wise and coutner-clock-wise
 }
 
 int main(){
