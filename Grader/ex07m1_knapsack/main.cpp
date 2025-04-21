@@ -4,11 +4,22 @@ int n;
 double max_w,res = 0;
 vector<double> v,w,psa;
 
+double heuristic(int i,double totalSpace){
+    double sum = 0;
+    for(int j = i;j < n;j++){
+        if((max_w - totalSpace) >= w[j]){
+            sum += v[j];
+            totalSpace += w[j];
+        }
+    }
+    return sum; 
+}
+
 void knapsack(int i,double totalValue,double totalSpace){
     // Back Tracking
     if(totalSpace > max_w) return;
     // branch and bound
-    if(res > totalValue + (psa[n] - psa[i - 1])) return;
+    if(res > totalValue + heuristic(i,totalSpace)) return;
     if(i < n + 1){
         if(max_w - totalSpace > w[i]) knapsack(i+1,totalValue + v[i],totalSpace + w[i]);
         knapsack(i+1,totalValue,totalSpace);
