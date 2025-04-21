@@ -10,7 +10,7 @@ double heuristic(int i,double totalSpace){
         if((max_w - totalSpace) >= w[j]){
             sum += v[j];
             totalSpace += w[j];
-        }
+        }else return sum;
     }
     return sum; 
 }
