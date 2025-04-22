@@ -4,38 +4,45 @@ using namespace std;
 int main(){
     int n;
     cin >> n;
-    vector<int> v(n),c(4,0);
+    vector<int> v(n);
+    unordered_map<int,int> c;
     for(int i = 0;i < n;i++){ 
         cin >> v[i];
         c[v[i]]++;
     }
-    int res = 0;
-    int i1 = 0,i2 = c[1],i3 = c[1] + c[2]; // start index of 2,3
-    for(int i = 0;i < n;i++){
-        if(i < c[1]){ // 1's zone
-            if(v[i] == 2){// if it is 2 swap with 2's zone
-                swap(v[i],v[i2++]);
-            }else if(v[i] == 3){//swap with 3 zone
-                swap(v[i],v[i3++]);
-            }
+    int res = 0,j = c[1];
+    for(int i = 0;i < c[1];i++){
+        if(v[i] == 2){ // scan for 2 in 1's zone and swap
+            while(v[j] != 1) j++;
+            swap(v[i],v[j]);
             res++;
-        }else if(i < c[1] + c[2]){// 2's zone
-            if(v[i] == 1){// if it is 1 swap with 1's zone
-                swap(v[i],v[i1++]);
-                
-            }else if(v[i] == 3){//swap 3 with 3 zone
-                swap(v[i],v[i3++]);
-            }
-            res++;
-        }else{ // 3's zone
-            if(v[i] == 1){// swap 1 with 1's zone
-                swap(v[i],v[i1++]);
-            }else if(v[i] == 2){//swap 2 with 2 zone
-                swap(v[i],v[i2++]);
-            }
-            res++;
-        } 
+        }
     }
+    for(int i = 0;i < c[1];i++){
+        if(v[i] == 3){ // scan for 3 in 1's zone and swap
+            while(v[j] != 1) j++;
+            swap(v[i],v[j]);
+            res++;
+        }
+    }
+    j = c[1] + c[2]; // update j to able to find 2 in 3's zone
+    for(int i = c[1];i < c[1] + c[2];i++){
+        if(v[i] != 2){ // scan for 3 in 2's zone and swap
+            while(v[j] != 2) j++;
+            swap(v[i],v[j]);
+            res++;
+        }
+    }
+
     cout << res;
+    // cout << "\n" << c[1] << " " << c[2] << " " << c[3] << "\n";
+    // for(int i = 0;i < n;i++){
+    //     if(i < c[1] && v[i] != 1) cout << "1's Failed\n";
+    //     else if( i >= c[1] && i < c[1] + c[2] && v[i] != 2) cout << "2's Failed\n ";
+    //     else if( i >= c[1] + c[2] && v[i] != 3) cout << "3's Failed\n";
+    // }
+    // for(int i = 0;i < n;i++){
+    //     cout << v[i] << " ";
+    // }
     return 0;
 }
