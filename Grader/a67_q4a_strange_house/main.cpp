@@ -8,6 +8,18 @@ vector<int> bed;
 map<string,bool> checkGen;
 bool found = false;
 
+int heuristic(){
+    int c = 0;
+    for(int i  = 0;i < 2*n;i++){
+        if(i < n){
+            if(bed[i] != 2) c++;
+        }else{
+            if(bed[i] != 1) c++;
+        }
+    }
+    return c;
+}
+
 string bed_tostr(){
     string s = "";
     for(int e:bed){
